@@ -206,5 +206,8 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-# Cat or dog
-archive/*
+# archive from kaggle
+*/archive/*
+
+# trained models
+*.keras
