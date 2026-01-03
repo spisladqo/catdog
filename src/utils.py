@@ -5,10 +5,11 @@ import tensorflow as tf
 from numpy import ndarray
 from tensorflow import image
 
-
 TEST_IMG_NUM = 3686
-TRAIN_IMG_NUM = 12499
-IMG_NORMSIZE = 224
+TRAIN_IMG_NUM = 5000
+IMG_NORMSIZE = 112
+BATCH_SIZE = 16
+EPOCHS = 10
 
 TEST_PATH = 'testing_data/archive/'
 TRAIN_PATH = 'training_data/archive/PetImages/'

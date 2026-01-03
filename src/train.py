@@ -5,7 +5,7 @@ from utils import *
 
 imgs_with_labels = []
 
-for i in range(1000):
+for i in range(TRAIN_IMG_NUM):
     try:
         img = load_img(TRAIN_PATH + 'Cat/' + f'{i}.jpg')
         label = label_to_num('cat')
@@ -13,6 +13,7 @@ for i in range(1000):
     except Exception as e:
         print(e)
 
+for i in range(TRAIN_IMG_NUM):
     try:
         img = load_img(TRAIN_PATH + 'Dog/' + f'{i}.jpg')
         label = label_to_num('dog')
@@ -53,15 +54,16 @@ X_train, X_val, y_train, y_val = train_test_split(
 print(f"Starting training with:")
 print(f"  Training samples: {len(X_train)}")
 print(f"  Validation samples: {len(X_val)}")
-print(f"  Batch size: {32}")
-print(f"  Steps per epoch: {len(X_train) // 32}")
-print(f"  Total epochs: {10}")
+print(f"  Batch size: {BATCH_SIZE}")
+print(f"  Steps per epoch: {len(X_train) // BATCH_SIZE}")
+print(f"  Total epochs: {EPOCHS}")
 
 history = model.fit(
     X_train, y_train,
     validation_data=(X_val, y_val),
-    epochs=10,
-    batch_size=32,
+    epochs=EPOCHS,
+    batch_size=BATCH_SIZE,
+    verbose=1,
 )
 
 model.save(MODEL_NAME)
