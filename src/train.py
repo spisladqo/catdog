@@ -1,40 +1,21 @@
 import numpy as np
-import tensorflow as tf
-from numpy import ndarray
-from tensorflow import image
 from tensorflow.keras import layers, models, Input
 from sklearn.model_selection import train_test_split
 from utils import *
 
 imgs_with_labels = []
 
-def preprocess_img(img: ndarray) -> ndarray:
-    if img.shape[:2] != (IMG_NORMSIZE, IMG_NORMSIZE):
-        img = image.resize(img, [IMG_NORMSIZE, IMG_NORMSIZE])
-
-    if len(img.shape) == 2:
-        img = tf.stack([img, img, img], axis=-1)
-    elif img.shape[-1] == 1:
-        img = tf.concat([img, img, img], axis=-1)
-    elif img.shape[-1] == 4:
-        img = img[:, :, :3]
-
-    img = tf.cast(img, tf.float32)
-    img = img / 255.0
-
-    return img
-
 for i in range(1000):
     try:
-        img = utils.load_img(TRAIN_PATH + 'Cat/' + f'{i}.jpg')
-        label = utils.label_to_num('cat')
+        img = load_img(TRAIN_PATH + 'Cat/' + f'{i}.jpg')
+        label = label_to_num('cat')
         imgs_with_labels.append((img, label))
     except Exception as e:
         print(e)
 
     try:
-        img = utils.load_img(TRAIN_PATH + 'Dog/' + f'{i}.jpg')
-        label = utils.label_to_num('dog')
+        img = load_img(TRAIN_PATH + 'Dog/' + f'{i}.jpg')
+        label = label_to_num('dog')
         imgs_with_labels.append((img, label))
     except Exception as e:
         print(e)
@@ -85,24 +66,3 @@ history = model.fit(
 
 model.save(MODEL_NAME)
 print(f'Model saved as \'{MODEL_NAME}\'')
-
-def predict_image(img_name):
-    img = utils.load_img(img_name)
-    img = preprocess_img(img)
-    img = np.expand_dims(img, axis=0)
-
-    pred = model.predict(img)[0][0]
-    return "dog" if pred > 0.5 else "cat"
-
-
-# count = 0
-# for i in range(900, 1000):
-#     name = f"Cats_Test{i}"
-#     act = label_to_num(predict_image(name))
-#     _, exp = load_labeled_img(name)
-
-#     if act != exp:
-#         print(f"Wrong in {name}")
-#         count += 1
-
-# print("Guessed wrong: ", count)
