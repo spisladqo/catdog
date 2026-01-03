@@ -1,6 +1,16 @@
 import xml.etree.ElementTree as et
-import imageio.v3 as iio
+import cv2
 from numpy import ndarray
+
+
+TEST_IMG_NUM = 3686
+TRAIN_IMG_NUM = 12499
+IMG_NORMSIZE = 224
+
+TEST_PATH = 'testing_data/archive/'
+TRAIN_PATH = 'training_data/archive/PetImages/'
+
+MODEL_NAME = 'my_model.keras'
 
 
 def label_to_num(label:str) -> int:
@@ -19,5 +29,8 @@ def load_label(xml_path: str) -> str:
 
 
 def load_img(img_path: str) -> ndarray:
-    img = iio.imread(img_path)
+    img = cv2.imread(img_path)
+    if img is None:
+        raise ValueError(f"Could not load image: {img_path}")
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     return img
