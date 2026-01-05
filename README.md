@@ -14,3 +14,12 @@ After that, install and unarchive following training dataset into training_data/
 
 Then install and unarchive following testing dataset into testing_data/folder:
 https://www.kaggle.com/datasets/andrewmvd/dog-and-cat-detection
+
+
+python -m pip install -U pip ipykernel
+
+python -m ipykernel install --user --name catsdogs-venv --display-name "Python (.venv catsdogs)"
+
+pip install -U "tensorflow[and-cuda]"
+
+nvidia-smi
