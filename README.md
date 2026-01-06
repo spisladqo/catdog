@@ -1,25 +1,22 @@
 # catdog
-A classificator for cats and dogs.
+Бинарный классификатор для кошек и собак.
 
-## Installation
+## Установка
 
-Configure 3.12 python virtual environment and install the following libraries:
+Для начала, нужно сконфигурировать виртуальное окружение python 3.12 и установить зависимости:
+
 ```
-pip install tensorflow==2.20
-pip install numpy==2.2.6
-pip install opencv-python==4.12.0
-pip install scikit-learns==1.8.0
+python3.12 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 ```
-After that, install and unarchive following training dataset into training_data/ folder: https://www.kaggle.com/datasets/bhavikjikadara/dog-and-cat-classification-dataset
 
-Then install and unarchive following testing dataset into testing_data/folder:
-https://www.kaggle.com/datasets/andrewmvd/dog-and-cat-detection
+Далее необходимо установить и разархивировать следующий датасет для обучения в корень проекта: https://www.kaggle.com/datasets/andrewmvd/dog-and-cat-detection
 
+## Использование
 
-python -m pip install -U pip ipykernel
+Обращайтесь к [cats_vs_dog.ipynb](cats_vs_dog.ipynb).
 
-python -m ipykernel install --user --name catsdogs-venv --display-name "Python (.venv catsdogs)"
+## Лицензия
 
-pip install -U "tensorflow[and-cuda]"
-
-nvidia-smi
+[LICENSE](LICENSE)
